@@ -95,7 +95,7 @@ def main():
     for line in lines:
         word = get_word(line)
         board = get_board(line)
-        print(f"word: {word}, board:{board}")
+        print(f"word: {word}, board: {board}")
 
         exists = word_check.exist(board, word)
 
