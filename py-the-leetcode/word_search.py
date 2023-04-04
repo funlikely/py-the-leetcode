@@ -26,39 +26,43 @@ class Solution:
 
     def exist_recursive_right(self, word, start_coord, used_indices):
         j, i = start_coord
+        next_coord = (j, i + 1)
         if i == self.n - 1:
             return False
-        if self.board[j][i + 1] != word[0] or start_coord in used_indices:
+        if self.board[j][i + 1] != word[0] or next_coord in used_indices:
             return False
-        used_indices.append(start_coord)
-        return self.exist_recursive(word[1:], (j, i + 1), used_indices)
+        more_used_indices = [next_coord] + used_indices
+        return self.exist_recursive(word, next_coord, more_used_indices)
 
     def exist_recursive_left(self, word, start_coord, used_indices):
         j, i = start_coord
+        next_coord = (j, i - 1)
         if i == 0:
             return False
-        if self.board[j][i - 1] != word[0] or start_coord in used_indices:
+        if self.board[j][i - 1] != word[0] or next_coord in used_indices:
             return False
-        used_indices.append(start_coord)
-        return self.exist_recursive(word, (j, i - 1), used_indices)
+        more_used_indices = [next_coord] + used_indices
+        return self.exist_recursive(word, next_coord, more_used_indices)
 
     def exist_recursive_up(self, word, start_coord, used_indices):
         j, i = start_coord
+        next_coord = (j - 1, i)
         if j == 0:
             return False
-        if self.board[j - 1][i] != word or start_coord in used_indices:
+        if self.board[j - 1][i] != word or next_coord in used_indices:
             return False
-        used_indices.append(start_coord)
-        return self.exist_recursive(word, (j - 1, i), used_indices)
+        more_used_indices = [next_coord] + used_indices
+        return self.exist_recursive(word, next_coord, more_used_indices)
 
     def exist_recursive_down(self, word, start_coord, used_indices):
         j, i = start_coord
+        next_coord = (j + 1, i)
         if j == self.m - 1:
             return False
-        if self.board[j + 1][i] != word[0] or start_coord in used_indices:
+        if self.board[j + 1][i] != word[0] or next_coord in used_indices:
             return False
-        used_indices.append(start_coord)
-        return self.exist_recursive(word, (j + 1, i), used_indices)
+        more_used_indices = [next_coord] + used_indices
+        return self.exist_recursive(word, next_coord, more_used_indices)
 
     def exist_recursive(self, word, start_coord, used_indices):
         if len(word) == 0:
