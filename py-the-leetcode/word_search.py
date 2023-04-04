@@ -4,6 +4,7 @@
 
 """
 from typing import List
+from ast import literal_eval
 
 
 class Solution:
@@ -12,11 +13,11 @@ class Solution:
 
 
 def get_word(line):
-    return "ASDF"
+    return literal_eval(line.split(' ')[5])
 
 
 def get_board(line):
-    return [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+    return literal_eval(line.split(' ')[2].strip(','))
 
 
 def main():
@@ -28,6 +29,7 @@ def main():
     for line in lines:
         word = get_word(line)
         board = get_board(line)
+        print(f"word: {word}, board:{board}")
 
         exists = word_check.exist(board, word)
 
