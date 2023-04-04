@@ -8,8 +8,54 @@ from ast import literal_eval
 
 
 class Solution:
+    def __init__(self):
+        self.board = []
+        self.n = 0
+        self.m = 0
+
     def exist(self, board: List[List[str]], word: str) -> bool:
-        return True
+        self.board = board
+        self.n = len(board)  # height
+        self.m = len(board[0])  # length
+        for i in range(self.m):
+            for j in range(self.n):
+                if board[j][i] == word[0]:
+                    if self.exist_recursive(word, (j, i), []):
+                        return True
+        return False
+
+    def exist_recursive_right(self, word, start_coord, used_indices):
+        j, i = start_coord
+        if i == self.m - 1 or self.board[j][i + 1] != word[0] or start_coord in used_indices:
+            return False
+        return self.exist_recursive(word[1:], (j, i + 1), used_indices.append(start_coord))
+
+    def exist_recursive_left(self, word, start_coord, used_indices):
+        j, i = start_coord
+        if i == 0 or self.board[j][i - 1] != word[0] or start_coord in used_indices:
+            return False
+        return self.exist_recursive(word[1:], (j, i - 1), used_indices.append(start_coord))
+
+    def exist_recursive_up(self, word, start_coord, used_indices):
+        j, i = start_coord
+        if j == 0 or self.board[j - 1][i] != word[0] or start_coord in used_indices:
+            return False
+        return self.exist_recursive(word[1:], (j - 1, i), used_indices.append(start_coord))
+
+    def exist_recursive_down(self, word, start_coord, used_indices):
+        j, i = start_coord
+        if j == self.m - 1 or self.board[j + 1][i] != word[0] or start_coord in used_indices:
+            return False
+        return self.exist_recursive(word[1:], (j + 1, i), used_indices.append(start_coord))
+
+    def exist_recursive(self, word, start_coord, used_indices):
+        if len(word) == 0:
+            print(f"found the word, used_indices: {used_indices.append(start_coord)}")
+            return True
+        return self.exist_recursive_up(word, start_coord, used_indices) or \
+            self.exist_recursive_down(word, start_coord, used_indices) or \
+            self.exist_recursive_right(word, start_coord, used_indices) or \
+            self.exist_recursive_left(word, start_coord, used_indices)
 
 
 def get_word(line):
