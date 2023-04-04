@@ -20,7 +20,7 @@ class Solution:
         for i in range(self.n):
             for j in range(self.m):
                 if board[j][i] == word[0]:
-                    if self.exist_recursive(word, (j, i), []):
+                    if self.exist_recursive(word, (j, i), [(j, i)]):
                         return True
         return False
 
@@ -66,13 +66,11 @@ class Solution:
 
     def exist_recursive(self, word, start_coord, used_indices):
         if len(word) == 0:
-            used_indices.append(start_coord)
-            print(f"found the word, used_indices: {used_indices}")
+            print(f"found the word, used_indices: {used_indices[::-1]}")
             return True
         j, i = start_coord
         if len(word) == 1 and self.board[j][i] == word[0]:
-            used_indices.append(start_coord)
-            print(f"found the word, used_indices: {used_indices}")
+            print(f"found the word, used_indices: {used_indices[::-1]}")
             return True
         return self.exist_recursive_up(word[1:], start_coord, used_indices) or \
             self.exist_recursive_down(word[1:], start_coord, used_indices) or \
