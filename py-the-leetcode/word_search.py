@@ -49,7 +49,7 @@ class Solution:
         next_coord = (j - 1, i)
         if j == 0:
             return False
-        if self.board[j - 1][i] != word or next_coord in used_indices:
+        if self.board[j - 1][i] != word[0] or next_coord in used_indices:
             return False
         more_used_indices = [next_coord] + used_indices
         return self.exist_recursive(word, next_coord, more_used_indices)
