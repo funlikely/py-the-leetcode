@@ -20,13 +20,13 @@ class Solution:
         for i in range(self.n):
             for j in range(self.m):
                 if board[j][i] == word[0]:
-                    if self.exist_recursive(word, (j, i), [(-1, -1)]):
+                    if self.exist_recursive(word, (j, i), []):
                         return True
         return False
 
     def exist_recursive_right(self, word, start_coord, used_indices):
         j, i = start_coord
-        if i == self.m - 1:
+        if i == self.n - 1:
             return False
         if self.board[j][i + 1] != word[0] or start_coord in used_indices:
             return False
@@ -40,16 +40,16 @@ class Solution:
         if self.board[j][i - 1] != word[0] or start_coord in used_indices:
             return False
         used_indices.append(start_coord)
-        return self.exist_recursive(word[1:], (j, i - 1), used_indices)
+        return self.exist_recursive(word, (j, i - 1), used_indices)
 
     def exist_recursive_up(self, word, start_coord, used_indices):
         j, i = start_coord
         if j == 0:
             return False
-        if self.board[j - 1][i] != word[0] or start_coord in used_indices:
+        if self.board[j - 1][i] != word or start_coord in used_indices:
             return False
         used_indices.append(start_coord)
-        return self.exist_recursive(word[1:], (j - 1, i), used_indices)
+        return self.exist_recursive(word, (j - 1, i), used_indices)
 
     def exist_recursive_down(self, word, start_coord, used_indices):
         j, i = start_coord
@@ -58,11 +58,17 @@ class Solution:
         if self.board[j + 1][i] != word[0] or start_coord in used_indices:
             return False
         used_indices.append(start_coord)
-        return self.exist_recursive(word[1:], (j + 1, i), used_indices)
+        return self.exist_recursive(word, (j + 1, i), used_indices)
 
     def exist_recursive(self, word, start_coord, used_indices):
         if len(word) == 0:
-            print(f"found the word, used_indices: {used_indices.append(start_coord)}")
+            used_indices.append(start_coord)
+            print(f"found the word, used_indices: {used_indices}")
+            return True
+        j, i = start_coord
+        if len(word) == 1 and self.board[j][i] == word[0]:
+            used_indices.append(start_coord)
+            print(f"found the word, used_indices: {used_indices}")
             return True
         return self.exist_recursive_up(word[1:], start_coord, used_indices) or \
             self.exist_recursive_down(word[1:], start_coord, used_indices) or \
