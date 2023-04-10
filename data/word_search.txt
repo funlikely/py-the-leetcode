@@ -10,3 +10,4 @@ board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "EEDASFC
 board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "EEDASFCSECBX"
 board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "EESES"
 board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], word = "SABFDECCES"
+board = [["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"],["A","A","A","A","A","A"]], word = "AAAAAAAAAAAAAAa"
