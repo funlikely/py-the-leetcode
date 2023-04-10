@@ -12,6 +12,13 @@
     You may assume that you have an infinite number of each kind of coin.
 
     The answer is guaranteed to fit into a signed 32-bit integer.
+
+    Note: test cases should include,
+    1. Primes, with a nonzero result (change can be made). E.g., change(101, [2, 3, 5, 7, 11])
+    2. Zero result. E.g., change(100, [51, 52, 54, 55, 56, 66])
+    3. A nice long case, like the project euler one that has 72,000 ways of making change.
+        E.g., change(200, [200, 100, 50, 20, 10, 5, 2, 1])
+
 """
 from typing import List
 
@@ -23,26 +30,21 @@ class Solution:
         self.comboes = []
 
     def change(self, amount: int, coins: List[int]) -> int:
+        self.amount = amount
+        self.coins = coins
+        self.coins.sort(reverse=True)
         return len(self.comboes)
 
 
 def main():
-    file = open("../data/word_search.txt")
+    file = open("../data/coin_change_2.txt")
     lines = file.readlines()
 
-    word_check = Solution()
+    coin_changer = Solution()
 
     for line in lines:
-        word = get_word(line)
-        board = get_board(line)
-        print(f"word: {word}, board: {board}")
+        amount = line.split
 
-        exists = word_check.exist(board, word)
-
-        print(f"Existence of word '{word}': {exists}")
-
-    # word = "ASDF"
-    # board = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
 
 
 if __name__ == '__main__':
