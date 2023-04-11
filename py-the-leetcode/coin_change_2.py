@@ -21,19 +21,37 @@
 
 """
 from typing import List
+import ast
 
 
 class Solution:
     def __init__(self):
         self.coins = []
         self.amount = 0
-        self.comboes = []
+        self.combos = []
 
     def change(self, amount: int, coins: List[int]) -> int:
         self.amount = amount
         self.coins = coins
         self.coins.sort(reverse=True)
-        return len(self.comboes)
+        base_coins = {c: 0 for c in coins}
+
+        self.combos = [base_coins]
+
+        for i in range(len(coins)):
+            """
+                Start of loop: Every coin in coins up to 'i' should be REPRESENTED in self.combos
+                Initially: self.combos = [{base_coins}]
+            """
+            coin_value = coins[i]
+            for combo in self.combos:
+
+
+                new_combos = []
+
+                self.combos = new_combos
+
+        return len(self.combos)
 
 
 def main():
@@ -43,8 +61,10 @@ def main():
     coin_changer = Solution()
 
     for line in lines:
-        amount = line.split
-
+        coin_changer.amount, coin_changer.coins = ast.literal_eval(line)
+        change_result = coin_changer.change(coin_changer.amount, coin_changer.coins)
+        print(f"Let's change these coins! Amount: {coin_changer.amount}, Coins: {coin_changer.coins}, " +
+                f"Ways of change: {change_result}")
 
 
 if __name__ == '__main__':
