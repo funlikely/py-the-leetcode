@@ -44,16 +44,16 @@ class Solution:
         coin_kinds = len(coins)
 
         coin_index = coin_kinds - 1
-        lookup[coin_index] = [1 if i % coins[coin_index] == 0 and i != 0 else 0 for i in range(amount + 1)]
+        lookup[coin_index] = [1 if i % coins[coin_index] == 0 else 0 for i in range(amount + 1)]
         print(f"coin: {coins[coin_index]}, amount = {amount}, lookup: {lookup[coin_index]}")
         coin_index -= 1
         while coin_index >= 0:
             last_one = lookup[coin_index + 1]
-            this_one = [(1 if i % coins[coin_index] == 0 and i != 0 else 0) + lookup[coin_index + 1][i] for i in range(amount + 1)]
-            lookup[coin_index] = [sum([last_one[j] + this_one[i-j] for j in range(i)]) for i in range(amount+1)]
+            this_one = [1 if i % coins[coin_index] == 0 else 0 for i in range(amount + 1)]
+            lookup[coin_index] = [sum([last_one[j] * this_one[i-j] for j in range(i+1)]) for i in range(amount + 1)]
             print(f"coin: {coins[coin_index]}, amount = {amount}, lookup: {lookup[coin_index]}")
             coin_index -= 1
-        return change_count
+        return lookup[0][-1:][0]
 
 
 def main():
